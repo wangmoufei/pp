@@ -2,6 +2,7 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import random
 
 from scrapy import signals
 
@@ -71,6 +72,17 @@ class MiddletestDownloaderMiddleware:
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
+        request.headers[
+            'user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40'
+
+        # request.meta['proxy']="https://111.229.161.172:888"
+        plist = ["https://103.44.176.130:82",
+                 "https://42.194.232.51:8088",
+                 "https://47.100.65.253:7890",
+                 "https://47.117.2.33:8080",
+                 "https://114.104.139.90:9055",
+                 ]
+        request.meta['proxy'] = random.choice(plist)  # 随机获取一个ip使用
 
         # Must either:
         # - return None: continue processing this request

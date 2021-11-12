@@ -13,9 +13,9 @@ conn = db.cursor()
 
 
 # 获得接口，解析评论接口
-def parse_comments_json(comments_list, path):
+def parse_comments_json(comments_list):
     for hotComments in comments_list:
-        print("==============================================")
+
         user_icon = hotComments.get('user').get('avatarUrl')
         print("user_icon: ", user_icon)
         userId = hotComments.get('user').get('userId')
@@ -30,19 +30,7 @@ def parse_comments_json(comments_list, path):
         print("zan_count: ", zan_count)
         comment_content = hotComments.get('content')
         print("comment_content: ", comment_content)
-        q = [userId, user_nickname, user_icon, comment_content, zan_count, comment_time]
-        sql = u"insert into wyyurl(用户id,用户名字,用户头像地址,用户评论,点赞数,用户评论时间)values(%s,%s,%s,%s,%s,%s)"
-        # print(sql)
-        conn.execute(sql, q)
-        db.commit()
-        # print('成功')
-        # try:
-        #     # 读写文件
-        #     with open(path, 'a+', encoding='utf-8') as f:
-        #         f.write(str(userId) + ";" + user_nickname + ";" + comment_content + ";" + str(
-        #             zan_count) + ";" + user_icon + "; " + comment_time + "\n")
-        # except Exception as e:
-        #     pass
+
 
 
 # 获取全部评论
@@ -54,25 +42,20 @@ def get_wangyiyu_comments(url, path):
         'Host': "music.163.com",
         'User-Agent': "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.79 Safari/537.36"
     }
-    n = 1
-    for i in range(0, 150, 20):
-        param = {
-            'limit': str(i),
-            'offset': str(n * 20 - 1)
-        }
-        n += 1
-        response = requests.post(url, headers=header, params=param)
-        comments_dict = json.loads(response.text)
-        comments_list = comments_dict.get('comments')
-        parse_comments_json(comments_list, path=path)
+
+    response = requests.post(url, headers=header)
+    comments_dict = json.loads(response.text)
+    comments_list = comments_dict.get('comments')
+    parse_comments_json(comments_list)
 
 
 if __name__ == '__main__':
     path = 'HelloMyLove.txt'
     start_time = time.time()
-    for i in range(137844, 1624015002246):
-        time.sleep(8)
+    for i in range(575392, 775392):
+        # time.sleep(8)
         comments_url = "http://music.163.com/api/v1/resource/comments/R_SO_4_{}".format(i)  # 小宇
+        print("==================================================================================================================================================")
         print('爬取的api地址', comments_url)  # 爬取的api地址
         get_wangyiyu_comments(comments_url, path)
         end_time = time.time()

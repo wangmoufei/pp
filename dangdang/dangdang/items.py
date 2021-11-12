@@ -16,6 +16,5 @@ class DangdangItem(scrapy.Item):
     publish = scrapy.Field()  # 出版时间
     price = scrapy.Field()  # 价格
     comment = scrapy.Field()  # 评论条
-
     image_urls = scrapy.Field()
     images = scrapy.Field()

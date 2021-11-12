@@ -9,6 +9,7 @@ class DangSpider(scrapy.Spider):
 
     def parse(self, response):
         # 获取所有图书信息
+        print(response)
         dlist = response.selector.css("ul.bigimg li")
         for dd in dlist:
             item = DangdangItem()  # 实例化DangdangItem

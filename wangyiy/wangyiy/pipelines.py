@@ -13,8 +13,9 @@ class WangyiyPipeline:
         return item
 
 
-
 import pymysql
+
+
 # mysql数据库存储
 class MysqlPipeline:
 
@@ -38,7 +39,8 @@ class MysqlPipeline:
 
     def open_spider(self, spider):
         # 打开数据库链接
-        self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database, port=self.port, charset="utf8")
+        self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database,
+                                  port=self.port, charset="utf8")
         self.cursor = self.db.cursor()
 
     def close_spider(self, spider):
@@ -48,8 +50,10 @@ class MysqlPipeline:
 
     def process_item(self, item, spider):
         # 负责数据储存
-        sql = u"insert into dangdang(title,author,pic,publish,comment,price)values('%s','%s','%s','%s','%s','%s')" % (
-            item['title'], item['author'], item['pic'], item['publish'], item['comment'], item['price'])
+        sql = u"insert into usersonglistinformation(歌单ID,歌单名字,标签,创建时间,播放次数,订阅人数,昵称,性别,用户类型,vip类型,省,城市)values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (
+            item['playlistID'], item['name'], item['tags'], item['createTime'], item['playCount'],
+            item['subscribedCount'], item['nickname'], item['gender'], item['userType'], item['vipType'],
+            item['province'], item['city'])
         print(sql)
         self.cursor.execute(sql)
         self.db.commit()

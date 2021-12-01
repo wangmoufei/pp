@@ -15,10 +15,10 @@ class WyySpider(scrapy.Spider):
     # start_urls = ['http://music.163.com/api/v1/resource/comments/R_SO_4_{}'.format(i)]
     def start_requests(self):
         # 重写start_requests方法
-        for i in range(281234, 775392):
+        for i in range(589536, 775392):
             # time.sleep(20)
             start_urls = 'http://music.163.com/api/v1/resource/comments/R_SO_4_{}'.format(i)
-            # time.sleep(5)
+            print(start_urls)
             yield scrapy.Request(url=start_urls, callback=self.parse)
         # print(start_urls)
         # end_time = time.time()
@@ -41,6 +41,7 @@ class WyySpider(scrapy.Spider):
         item=WangyiyItem()#实例化WangyiyItem
         for json_playlist in json_user:
             item['playlistID']= str(json_playlist["id"])  # 播放列表ID
+            print(item['playlistID'])
             item['name'] = json_playlist["name"]  # 歌单名字
             item['tags'] = "、".join(json_playlist["tags"])  # 标签
             item['createTime'] = time.strftime("%Y-%m-%d", time.localtime(int(str(json_playlist["createTime"])[:-3])))  # 创建时间
@@ -80,11 +81,11 @@ class WyySpider(scrapy.Spider):
                 if item['city'] == str(json_playlist['creator']['city']):
                     item['city'] = item['province']
             yield item
-            # print(item)
+            print(item)
 
 
 if __name__ == '__main__':
     from scrapy import cmdline
 
-    args = "scrapy crawl wyy".split()
+    args = "scrapy crawl wyy --nolog".split()
     cmdline.execute(args)

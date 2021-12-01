@@ -82,7 +82,7 @@ class WyySpider(scrapy.Spider):
                 if item['city'] == str(json_playlist['creator']['city']):
                     item['city'] = item['province']
             yield item
-            print(item)
+            # print(item)
 
 
 if __name__ == '__main__':

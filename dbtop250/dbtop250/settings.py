@@ -1,4 +1,4 @@
-# Scrapy settings for wangyiy project
+# Scrapy settings for dbtop250 project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,19 +7,19 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'wangyiy'
+BOT_NAME = 'dbtop250'
 
-SPIDER_MODULES = ['wangyiy.spiders']
-NEWSPIDER_MODULE = 'wangyiy.spiders'
+SPIDER_MODULES = ['dbtop250.spiders']
+NEWSPIDER_MODULE = 'dbtop250.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'wangyiy (+http://www.yourdomain.com)'
+# USER_AGENT = 'dbtop250 (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 32
+# CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -36,26 +36,23 @@ CONCURRENT_REQUESTS = 32
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
-    'Accept': "*/*",
-    'Accept-Language': "zh-CN,zh;q=0.9",
-    'Connection': "keep-alive",
-    'Host': "music.163.com",
-    'User-Agent': "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.79 Safari/537.36"
-
-}
+# DEFAULT_REQUEST_HEADERS = {
+#     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+#     'Accept-Language': 'en',
+#     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34'
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'wangyiy.middlewares.WangyiySpiderMiddleware': 543,
+#    'dbtop250.middlewares.Dbtop250SpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'wangyiy.middlewares.WangyiyDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'dbtop250.middlewares.Dbtop250DownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -65,17 +62,10 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    # 'wangyiy.pipelines.WangyiyPipeline': 300,
-    'wangyiy.pipelines.MysqlPipeline': 301,
-}
-# 数据库链接
-MYSQL_HOST = '8.142.77.136'
-MYSQL_DATABASE = 'wangfei'
-MYSQL_USER = 'root'
-MYSQL_PASS = 'root'
-MYSQL_PORT = 3306
-# 配置下载的图片地址
+# ITEM_PIPELINES = {
+#    'dbtop250.pipelines.Dbtop250Pipeline': 300,
+# }
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True

@@ -9,4 +9,13 @@ import scrapy
 class Dbtop250Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    index = scrapy.Field()
+    title = scrapy.Field()
+    image = scrapy.Field()
+    author = scrapy.Field()
+    publisher = scrapy.Field()
+    time = scrapy.Field()
+    price = scrapy.Field()
+    score = scrapy.Field()
+    comments = scrapy.Field()
+
